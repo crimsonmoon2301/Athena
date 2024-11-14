@@ -1,4 +1,4 @@
-﻿<Window x:Class="Galadarbs_IT23033.MainWindow"
+<Window x:Class="Galadarbs_IT23033.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,8 +11,7 @@
         Background="Transparent"
         WindowStyle="None"
         AllowsTransparency="True"
-        MouseDown="Window_MouseDown" ResizeMode="CanResizeWithGrip"
->
+        MouseDown="Window_MouseDown" ResizeMode="CanResizeWithGrip">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -49,12 +48,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="System Sweeper 9000"
+            <TextBlock Text="Athena"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
+                       HorizontalAlignment="Center"
                        Foreground="White"
-                       FontSize="17"
-                       Margin="10"/>
+                       FontSize="24"
+                       Margin="10"
+                       FontFamily="Cascadia Mono"/>
             <Button Name="ExitButton" Width="40" Height="36" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,40,10" BorderThickness="0"
                     Background="Transparent" Click="ExitButton_Click">
                 <Image Source="Images/power.png" Width="38" Height="32" Margin="0,0,5,0"/>
@@ -76,13 +76,21 @@
                              Height="50" Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="ISO Builder"
+                <RadioButton Content="Windows ISO Builder"
                              Command="{Binding ISOBuildViewCommand,Mode=TwoWay}"
                              IsChecked="False"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Windows/Off Download"
+                             Command="{Binding DownloadViewCommand, Mode=TwoWay}"
+                             IsChecked="False"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                    />
                 <RadioButton Content="About"
                              Name="AboutProg_btn"
                              Command="{Binding AboutViewCommand, Mode=TwoWay}"
