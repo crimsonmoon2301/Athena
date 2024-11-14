@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Galadarbs_IT23033.MVVM.View.RegView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Galadarbs_IT23033.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="Transparent">
+    <Grid Margin="10">
+
+        <!-- Define columns for the main grid -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <!-- Available section -->
+            <ColumnDefinition Width="auto"/>
+            <!-- Buttons between lists -->
+            <ColumnDefinition Width="1.5*"/>
+            <!-- Selected section -->
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="auto"/>
+            <!-- Space for TextBox and buttons -->
+        </Grid.RowDefinitions>
+
+        <!-- Available ListBox -->
+        <StackPanel Grid.Column="0" VerticalAlignment="Stretch" Width="300">
+            <TextBlock Text="Available:" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" Height="300" Width="275">
+                <ListBox Name="AvailableListBox" ItemsSource="{Binding AvailableOptions, Mode=TwoWay}" 
+                         VerticalAlignment="Stretch" Height="350" Width="260">
+                </ListBox>
+            </ScrollViewer>
+        </StackPanel>
+
+        <!-- Buttons between lists -->
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10" Width="auto">
+            <Button Content="Add" Name="AddButton" Margin="5" Click="AddButton_Click"/>
+            <Button Content="Remove" Name="RemoveButton" Margin="5" Click="RemoveButton_Click"/>
+            <Button Content="Remove All" Name="RemoveAllButton" Margin="5" Click="RemoveAllButton_Click"/>
+            <CheckBox Content="Use Recommended Settings" Margin="5" Foreground="White" Name="Recom_btn" Checked="Recom_btn_Checked" Unchecked="Recom_btn_Unchecked" IsChecked="False"/>
+            <CheckBox Content="Enable experimental preset" Margin="5" Foreground="White" Name="Experim_btn" Checked="Experim_btn_Checked" Unchecked="Experim_btn_Unchecked"/>
+        </StackPanel>
+
+        <!-- Selected ListBox -->
+        <StackPanel Grid.Column="2" VerticalAlignment="Top">
+            <TextBlock Text="Selected:" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" Height="300" Width="275" MaxWidth="350">
+                <ListBox Name="SelectedListBox" ItemsSource="{Binding SelectedOptions, Mode=TwoWay}" 
+                         VerticalAlignment="Stretch" Height="350" MaxHeight="680" Width="260" MaxWidth="350">
+                </ListBox>
+            </ScrollViewer>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.55*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ToolBarTray Grid.Column="2" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <ToolBar>
+                    <Button Content="Save Config" Style="{StaticResource ToolbarButtonStyle}" Width="100" Name="ScriptSaveBtn" Click="ScriptSaveBtn_Click"/>
+                    <Button Content="Execute Config" Style="{StaticResource ToolbarButtonStyle}" Width="100" Name="ScriptExecBtn" Click="ScriptExecBtn_Click"/>
+                </ToolBar>
+            </ToolBarTray>
+
+            <StackPanel Grid.Column="0" Margin="0,5,5,20">
+                <TextBlock Text="Select your template (Custom - Default)" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                <ComboBox Name="PresetComboBox" Width="190" Height="25" VerticalAlignment="Top" Margin="0,5,0,20" 
+                          ItemsSource="{Binding PresetOptions, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedPreset, Mode=TwoWay}"
+                          IsEditable="False">
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

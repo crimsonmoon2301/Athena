@@ -1,0 +1,48 @@
+﻿<Application x:Class="Galadarbs_IT23033.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Galadarbs_IT23033"
+             xmlns:viewModel="clr-namespace:Galadarbs_IT23033.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Galadarbs_IT23033.MVVM.View"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ButtonColorPaletteFormat.xaml"/>
+                <ResourceDictionary Source="Theme/TooolbarColorTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:MaintainViewModel}">
+                <view:MaintainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RegViewModel}">
+                <view:RegView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:OSModViewModel}">
+                <view:OSModView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ISOBuilderViewModel}">
+                <view:ISOBuilderView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
+                <view:AboutView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ServiceManViewModel}">
+                <view:ServiceManView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CompDiagnosticViewModel}">
+                <view:CompDiagnosticView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

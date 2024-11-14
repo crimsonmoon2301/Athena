@@ -1,0 +1,103 @@
+﻿<Window x:Class="Galadarbs_IT23033.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Galadarbs_IT23033"
+        xmlns:viewModel="clr-namespace:Galadarbs_IT23033.MVVM.ViewModel"
+        xmlns:view="clr-namespace:Galadarbs_IT23033.MVVM.View"
+        mc:Ignorable="d"
+        Height="600" Width="1150" MinHeight="550" MinWidth="1080" MaxWidth="1250" MaxHeight="700"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown" ResizeMode="CanResizeWithGrip"
+>
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Storyboard x:Key="FadeOutStoryboard">
+            <DoubleAnimation 
+                Storyboard.TargetName="MainGrid"
+                Storyboard.TargetProperty="Opacity"
+                From="1.0" To="0.0" Duration="0:0:2" />
+        </Storyboard>
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation 
+                Storyboard.TargetName="MainGrid"
+                Storyboard.TargetProperty="Opacity"
+                From="0.0" To="1.0" Duration="0:0:2" />
+        </Storyboard>
+        <ImageBrush x:Key="Wallpaper1" ImageSource="Images/bg2.png" />
+        <ImageBrush x:Key="Wallpaper2" ImageSource="Images/bg3.jpg" />
+        <ImageBrush x:Key="Wallpaper3" ImageSource="Images/bg4.jpg" />
+        <ImageBrush x:Key="Wallpaper4" ImageSource="Images/bg5.jpg" />
+
+    </Window.Resources>
+    <Border CornerRadius="10">
+        <Grid Name="MainGrid" Background="{StaticResource Wallpaper1}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="System Sweeper 9000"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="17"
+                       Margin="10"/>
+            <Button Name="ExitButton" Width="40" Height="36" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,40,10" BorderThickness="0"
+                    Background="Transparent" Click="ExitButton_Click">
+                <Image Source="Images/power.png" Width="38" Height="32" Margin="0,0,5,0"/>
+            </Button>
+            <Button Name="ChangeWall_btn" Width="40" Height="36" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,100,10" BorderThickness="0"
+                    Background="Transparent" Click="ChangeWall_btn_Click">
+                <Image Source="Images/move.png" Width="38" Height="32" Margin="0,0,5,0" RenderTransformOrigin="0.513,0.5"/>
+            </Button>
+
+            <StackPanel Grid.Row="1" Name="RadioButtonPanel">
+
+                <RadioButton Content="Main Screen"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand,Mode=TwoWay}"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Height="50" Foreground="White" FontSize="14"/>
+                <RadioButton Content="OS Management"
+                             Command="{Binding MaintainViewCommand, Mode=TwoWay}"
+                             Height="50" Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="ISO Builder"
+                             Command="{Binding ISOBuildViewCommand,Mode=TwoWay}"
+                             IsChecked="False"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="About"
+                             Name="AboutProg_btn"
+                             Command="{Binding AboutViewCommand, Mode=TwoWay}"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Content="{Binding CurrentView}"/>
+
+        </Grid>
+    </Border>
+</Window>

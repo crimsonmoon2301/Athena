@@ -1,0 +1,159 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style x:Key="RoundButtonV" TargetType="Button">
+        <Setter Property="Background" Value="#844eff"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="10" 
+                        BorderThickness="0">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               TextWrapping="Wrap" 
+                               FontSize="18"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#A080FF"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RoundButtonO" TargetType="Button">
+        <Setter Property="Background" Value="#FFA500"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="10" 
+                        BorderThickness="0">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               TextWrapping="Wrap" 
+                               FontSize="18"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFB84D"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RoundButtonG" TargetType="Button">
+        <Setter Property="Background" Value="#256511"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                    CornerRadius="10" 
+                    BorderThickness="0">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           TextWrapping="Wrap" 
+                           FontSize="18"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#2c7914"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RoundButtonY" TargetType="Button">
+        <Setter Property="Background" Value="#b29600"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                CornerRadius="10" 
+                BorderThickness="0">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       TextWrapping="Wrap" 
+                       FontSize="18"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#ccac00"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RoundButtonGR" TargetType="Button">
+        <Setter Property="Background" Value="#3d3d3d"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+            CornerRadius="10" 
+            BorderThickness="0">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   TextWrapping="Wrap" 
+                   FontSize="18"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#4c4c4c"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RoundButtonR" TargetType="Button">
+        <Setter Property="Background" Value="#600822"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="10" 
+                            BorderThickness="0">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   TextWrapping="Wrap" 
+                                   FontSize="18"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#c01045"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
