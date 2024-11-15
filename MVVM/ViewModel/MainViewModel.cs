@@ -16,7 +16,7 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         // os mod view properties
         public RelayCommand OSModCommand { get; set; }
 
-        // settings view properties
+        // ISO builder view properties
         public RelayCommand ISOBuildViewCommand { get; set; }
 
         // About this program view property
@@ -31,6 +31,9 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         // System Tuner property
         public RelayCommand OSTunerViewCommand { get; set; }
 
+        // Downloader property
+        public RelayCommand DownloaderViewCommand {  get; set; }
+
         // defining the views to their appropiate view models, get set helps assign properties
         public HomeViewModel HomeVm { get; set; }
         public MaintainViewModel MaintainVm { get; set; }
@@ -40,6 +43,8 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         public OSModViewModel OSModVm { get; set; }
 
         public ISOBuilderViewModel ISOBuildVm { get; set; }
+
+        public DownloadViewModel DownloadVm { get; set; }
 
         public AboutViewModel AboutVm { get; set; }
 
@@ -72,6 +77,7 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             ServiceManVm = new ServiceManViewModel();
             CompDiagVm = new CompDiagnosticViewModel();
             OSTunerVm = new OSTunerViewModel();
+            DownloadVm = new DownloadViewModel();
             CurrentView = HomeVm;
 
             HomeViewCommand = new RelayCommand(o =>
@@ -117,6 +123,11 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             OSTunerViewCommand = new RelayCommand(o =>
             {
                 CurrentView = OSTunerVm;
+            });
+
+            DownloaderViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = DownloadVm;
             });
         }
     }

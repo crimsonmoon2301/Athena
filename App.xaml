@@ -32,6 +32,10 @@
                 <view:ISOBuilderView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:DownloadViewModel}">
+                <view:DownloadView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
                 <view:AboutView/>
             </DataTemplate>

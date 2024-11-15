@@ -49,12 +49,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="System Sweeper 9000"
+            <TextBlock Text="Athena"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
+                       HorizontalAlignment="Center"
                        Foreground="White"
-                       FontSize="17"
-                       Margin="10"/>
+                       FontSize="24"
+                       Margin="10"
+                       FontFamily="Cascadia Mono"/>
             <Button Name="ExitButton" Width="40" Height="36" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,40,10" BorderThickness="0"
                     Background="Transparent" Click="ExitButton_Click">
                 <Image Source="Images/power.png" Width="38" Height="32" Margin="0,0,5,0"/>
@@ -76,13 +77,21 @@
                              Height="50" Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="ISO Builder"
+                <RadioButton Content="Windows ISO Builder"
                              Command="{Binding ISOBuildViewCommand,Mode=TwoWay}"
                              IsChecked="False"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Windows/Off Download"
+                             Command="{Binding DownloadViewCommand, Mode=TwoWay}"
+                             IsChecked="False"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                    />
                 <RadioButton Content="About"
                              Name="AboutProg_btn"
                              Command="{Binding AboutViewCommand, Mode=TwoWay}"

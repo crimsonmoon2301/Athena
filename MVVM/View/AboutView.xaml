@@ -9,7 +9,7 @@
              Background="Transparent">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,20,0,0">
-            <TextBlock Text="Windows Sweeper 9000" FontSize="24" FontWeight="Bold" Foreground="White" />
+            <TextBlock Text="Athena AIO PC Utility" FontSize="24" FontWeight="Bold" Foreground="White" />
             <TextBlock Text="Version 4.2.0" FontSize="14" FontStyle="Italic" Foreground="White" Margin="0,5,0,0"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Center">
@@ -18,7 +18,7 @@
             <TextBlock Text="Developed by Artis Priekulis, Information Technology 2nd year student"
                    HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Foreground="White" FontSize="18" TextWrapping="Wrap"/>
         </StackPanel>
-        <TextBlock Text="© 2024 Artis Priekulis. All Rights Reserved. "
+        <TextBlock Text="Check out my github for more projects @ crimsonmoon2301!"
        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,40" Foreground="White" FontSize="18"/>
     </Grid>
 </UserControl>

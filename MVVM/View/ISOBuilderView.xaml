@@ -6,7 +6,51 @@
              xmlns:local="clr-namespace:Galadarbs_IT23033.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"> Check back later!</TextBlock>
+    <Grid Margin="10">
+        <!-- Grid Layout -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Operating System Selection ListBox -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+            <TextBlock Text="Select Operating System:" Foreground="White" HorizontalAlignment="Center"/>
+            <ComboBox Name="OperatingSystemListBox" ItemsSource="{Binding AvailableOperatingSystems}" Width="260" Height="25"/>
+        </StackPanel>
+
+        <!-- Available Options ListBox with Advanced Options below it -->
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
+            <TextBlock Text="Available Options:" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+            <ListBox Name="AvailableListBox" ItemsSource="{Binding AvailableOptions}" Width="260" Height="250"/>
+
+            <StackPanel Name="AdvancedOptionsPanel" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Grid.Row="2" Grid.Column="0">
+                <CheckBox Content="Compress as ESD" Foreground="White"/>
+                <CheckBox Content="Option 2" Foreground="White"/>
+                <CheckBox Content="Option 3" Foreground="White"/>
+            </StackPanel>
+        </StackPanel>
+        <!-- Controls Column -->
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Add" Name="AddButton" Margin="5" Click="AddButton_Click"/>
+            <Button Content="Remove" Name="RemoveButton" Margin="5" Click="RemoveButton_Click"/>
+            <CheckBox Content="Show Advanced Options" Name="ShowAdvancedOptionsCheckbox" 
+                      Checked="ShowAdvancedOptionsCheckbox_Checked" 
+                      Unchecked="ShowAdvancedOptionsCheckbox_Unchecked" 
+                      Foreground="White"
+                      Margin="5"/>
+        </StackPanel>
+
+        <!-- Selected Options ListBox -->
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top">
+            <TextBlock Text="Selected Options:" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+            <ListBox Name="SelectedListBox" ItemsSource="{Binding SelectedOptions}" Width="260" Height="250"/>
+        </StackPanel>
     </Grid>
 </UserControl>
