@@ -38,8 +38,10 @@
         </StackPanel>
         <!-- Controls Column -->
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Test API?" Click="TestAPI_Click" Margin="5" />
             <Button Content="Add" Name="AddButton" Margin="5" Click="AddButton_Click"/>
             <Button Content="Remove" Name="RemoveButton" Margin="5" Click="RemoveButton_Click"/>
+            <Button Content="Populate list" Name="GetBuilds" Margin="5" Click="GetBuilds_Click"/>
             <CheckBox Content="Show Advanced Options" Name="ShowAdvancedOptionsCheckbox" 
                       Checked="ShowAdvancedOptionsCheckbox_Checked" 
                       Unchecked="ShowAdvancedOptionsCheckbox_Unchecked" 

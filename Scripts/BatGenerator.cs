@@ -8,7 +8,7 @@ namespace Galadarbs_IT23033.Scripts
         {
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                writer.WriteLine(":: Batch file generated on " + DateTime.Now + " via System Sweeper 9000 PC Utility");
+                writer.WriteLine(":: Batch file generated on " + DateTime.Now + " via Athena PC Utility");
                 writer.WriteLine("::----------------------------");
                 // Ensures that the script has admin rights. How else can you do changes to the system without them? This ain't powershell directly.
                 writer.WriteLine("@echo off");
