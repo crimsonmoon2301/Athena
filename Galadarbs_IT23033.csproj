@@ -16,9 +16,11 @@
     <None Remove="Images\bg3.jpg" />
     <None Remove="Images\bg4.jpg" />
     <None Remove="Images\bg5.jpg" />
+    <None Remove="Images\logo.png" />
     <None Remove="Images\move.png" />
     <None Remove="Images\power.png" />
     <None Remove="Images\power1.png" />
+    <None Remove="MVVM\View\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,9 +43,13 @@
     <Resource Include="Images\bg5.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\move.png" />
     <Resource Include="Images\power.png" />
     <Resource Include="Images\power1.png" />
+    <Resource Include="MVVM\View\logo.png" />
   </ItemGroup>
 
 </Project>

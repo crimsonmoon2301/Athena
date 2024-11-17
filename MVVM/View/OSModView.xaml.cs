@@ -67,21 +67,6 @@ namespace Galadarbs_IT23033.MVVM.View
                    $"Total Free Space: {totalFreeSpaceGB.ToString("0.0")} GB";
         }
 
-        private void GetTotalRAM() // Not the most accurate, but it works.
-        {
-            // Create a PerformanceCounter for "Memory" to get the total available physical memory
-            var availableRamCounter = new PerformanceCounter("Memory", "Available Bytes");
-
-            // This counter measures the available memory in bytes
-            float availableRamBytes = availableRamCounter.NextValue();
-
-            // Estimate installed total RAM based on a well-known fixed value for Windows overhead (if necessary)
-            var memoryLoadCounter = new PerformanceCounter("Memory", "Committed Bytes");
-
-            // Get the committed memory in bytes (how much is currently in use)
-            float committedRamBytes = memoryLoadCounter.NextValue();
-        }
-
         private static float GetTotalFreeSpace()
         {
             float totalFreeSpaceGB = 0;

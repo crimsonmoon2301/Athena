@@ -22,7 +22,13 @@
         <!-- Operating System Selection ListBox -->
         <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
             <TextBlock Text="Select Operating System:" Foreground="White" HorizontalAlignment="Center"/>
-            <ComboBox Name="OperatingSystemListBox" ItemsSource="{Binding AvailableOperatingSystems}" Width="260" Height="25"/>
+            <ComboBox Name="OperatingSystemComboBox" Width="260" Height="25" SelectionChanged="OperatingSystemComboBox_SelectionChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+            <TextBlock Text="Select Architecture:" Foreground="White" HorizontalAlignment="Center"/>
+            <CheckBox Content="AMD64" Name="amd64" Checked="AMDCheckBox_Toggled" Unchecked="AMDCheckBox_Untoggled" Foreground="White"/>
+            <CheckBox Content="ARM64" Name="arm64" Checked="ARMCheckBox_Toggled" Unchecked="ARMCheckBox_Untoggled" Foreground="White"/>
         </StackPanel>
 
         <!-- Available Options ListBox with Advanced Options below it -->

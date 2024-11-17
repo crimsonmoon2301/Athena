@@ -6,9 +6,8 @@ namespace Galadarbs_IT23033.Core
     {
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
-        private Action openAboutWindow;
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
@@ -18,11 +17,6 @@ namespace Galadarbs_IT23033.Core
         {
             _execute = execute;
             _canExecute = canExecute;
-        }
-
-        public RelayCommand(Action openAboutWindow)
-        {
-            this.openAboutWindow = openAboutWindow;
         }
 
         public bool CanExecute(object parameter)
