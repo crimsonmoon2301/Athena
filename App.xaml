@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/ButtonColorPaletteFormat.xaml"/>
                 <ResourceDictionary Source="Theme/TooolbarColorTheme.xaml"/>
+                <ResourceDictionary Source="Theme/CheckboxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>
@@ -38,10 +39,6 @@
 
             <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
                 <view:AboutView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:ServiceManViewModel}">
-                <view:ServiceManView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:CompDiagnosticViewModel}">

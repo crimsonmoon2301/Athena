@@ -180,7 +180,7 @@ namespace Galadarbs_IT23033.MVVM.View
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 FileName = "output.bat", // Default file name
-                Filter = "Batch files (*.bat)|*.bat|Powershell Script|*.ps1", // Filter for .bat files
+                Filter = "Batch files (*.bat)|*.bat", // Filter for .bat files
                 DefaultExt = ".bat" // Default file extension
             };
 
@@ -195,14 +195,9 @@ namespace Galadarbs_IT23033.MVVM.View
                     BatFileGenerator.GenerateBatFile(SelectedOptions, filePath);
                     MessageBox.Show($"BAT file saved as {filePath}");
                 }
-                else if (fileExtension == ".ps1")
-                {
-                    PowerShellgen.GeneratePs1File(SelectedOptions, filePath);
-                    MessageBox.Show($"PS1 file saved as {filePath}");
-                }
                 else
                 {
-                    MessageBox.Show("Please select a valid file type (.bat or .ps1).");
+                    MessageBox.Show("Please select a valid file type.");
                 }
             }
         }

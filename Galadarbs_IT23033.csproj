@@ -20,12 +20,15 @@
     <None Remove="Images\move.png" />
     <None Remove="Images\power.png" />
     <None Remove="Images\power1.png" />
-    <None Remove="MVVM\View\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Fonts\" />
     <Folder Include="MVVM\Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,7 +52,6 @@
     <Resource Include="Images\move.png" />
     <Resource Include="Images\power.png" />
     <Resource Include="Images\power1.png" />
-    <Resource Include="MVVM\View\logo.png" />
   </ItemGroup>
 
 </Project>

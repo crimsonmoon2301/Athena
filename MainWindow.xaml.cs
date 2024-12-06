@@ -13,14 +13,6 @@ namespace Galadarbs_IT23033
     /// </summary>
     public partial class MainWindow : Window
     {
-        // Array of wallpaper image paths
-        private string[] wallpapers = {
-             "Images/bg2.png",
-             "Images/bg3.jpg",
-             "Images/bg4.jpg",
-             "Images/bg5.jpg" // Add more wallpaper paths as needed
-        };
-
         private Random random = new Random();
 
         public MainWindow()

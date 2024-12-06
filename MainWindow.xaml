@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:Galadarbs_IT23033.MVVM.ViewModel"
         xmlns:view="clr-namespace:Galadarbs_IT23033.MVVM.View"
         mc:Ignorable="d"
-        Height="600" Width="1150" MinHeight="550" MinWidth="1080" MaxWidth="1250" MaxHeight="700"
+        Height="600" Width="1150" MinHeight="570" MinWidth="1100" MaxWidth="1200" MaxHeight="600"
         Background="Transparent"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -22,13 +22,13 @@
             <DoubleAnimation 
                 Storyboard.TargetName="MainGrid"
                 Storyboard.TargetProperty="Opacity"
-                From="1.0" To="0.0" Duration="0:0:2" />
+                From="1.0" To="0.0" Duration="0:0:1" />
         </Storyboard>
         <Storyboard x:Key="FadeInStoryboard">
             <DoubleAnimation 
                 Storyboard.TargetName="MainGrid"
                 Storyboard.TargetProperty="Opacity"
-                From="0.0" To="1.0" Duration="0:0:2" />
+                From="0.0" To="1.0" Duration="0:0:1" />
         </Storyboard>
         <ImageBrush x:Key="Wallpaper1" ImageSource="Images/bg2.png" />
         <ImageBrush x:Key="Wallpaper2" ImageSource="Images/bg3.jpg" />
@@ -84,7 +84,7 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"/>
                 <RadioButton Content="Windows/Off Download"
-                             Command="{Binding DownloadViewCommand, Mode=TwoWay}"
+                             Command="{Binding DownloaderViewCommand, Mode=TwoWay}"
                              IsChecked="False"
                              Height="50"
                              Foreground="White"

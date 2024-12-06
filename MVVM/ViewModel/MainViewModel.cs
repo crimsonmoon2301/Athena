@@ -22,9 +22,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         // About this program view property
         public RelayCommand AboutViewCommand { get; set; }
 
-        // ServiceManager view property
-        public RelayCommand ServiceManViewCommand {  get; set; }
-
         // Computer Diagnostic property
         public RelayCommand CompDiagnosticViewCommand { get; set; }
 
@@ -47,8 +44,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         public DownloadViewModel DownloadVm { get; set; }
 
         public AboutViewModel AboutVm { get; set; }
-
-        public ServiceManViewModel ServiceManVm { get; set; }
 
         public CompDiagnosticViewModel  CompDiagVm {  get; set; }
 
@@ -74,7 +69,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             OSModVm = new OSModViewModel();
             ISOBuildVm = new ISOBuilderViewModel();
             AboutVm = new AboutViewModel();
-            ServiceManVm = new ServiceManViewModel();
             CompDiagVm = new CompDiagnosticViewModel();
             OSTunerVm = new OSTunerViewModel();
             DownloadVm = new DownloadViewModel();
@@ -108,11 +102,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             AboutViewCommand = new RelayCommand(o =>
             {
                 CurrentView = AboutVm;
-            });
-
-            ServiceManViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = ServiceManVm;
             });
 
             CompDiagnosticViewCommand = new RelayCommand(o =>

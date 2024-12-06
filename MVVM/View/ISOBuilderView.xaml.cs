@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.Json;
+using System.IO;
+using static System.Net.WebRequestMethods;
+using System.Diagnostics;
 
 namespace Galadarbs_IT23033.MVVM.View
 {
@@ -27,24 +30,9 @@ namespace Galadarbs_IT23033.MVVM.View
 
         public ISOBuilderView()
         {
-            InitializeComponent();   
+            InitializeComponent();
         }
-        public async Task<string?> FetchUUPData(string url) // Checks if the API responds. If it does, it returns a string. If not, it returns null.
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadAsStringAsync();
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
+        
         // Incomplete. I will have a migraine with this.
         public async Task TestAPI()
         {
@@ -66,7 +54,7 @@ namespace Galadarbs_IT23033.MVVM.View
                         }
                         else
                         {
-                            MessageBox.Show("API version not found in response. The API may be possibly down.");
+                            MessageBox.Show("API version not found in response. The API format may be changed. Fix TBA");
                         }
                     }
                 }
@@ -81,26 +69,6 @@ namespace Galadarbs_IT23033.MVVM.View
             }
         }
 
-        private void ShowAdvancedOptionsCheckbox_Checked(object sender, RoutedEventArgs e)
-        {
-            AdvancedOptionsPanel.Visibility = Visibility.Visible;
-        }
-
-        private void ShowAdvancedOptionsCheckbox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            AdvancedOptionsPanel.Visibility = Visibility.Collapsed;
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RemoveButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private async void TestAPI_Click(object sender, RoutedEventArgs e)
         {
             await TestAPI();
@@ -110,10 +78,70 @@ namespace Galadarbs_IT23033.MVVM.View
         public List<BuildData> Builds { get; set; }
         public Dictionary<string, List<BuildData>> BuildsByVersion { get; set; }
 
+        private Dictionary<string, string> languages = new Dictionary<string, string>
+            {
+                { "neutral" , "Any Language"},
+                { "ar-sa", "Arabic (Saudi Arabia)" },
+                { "bg-bg","Bulgarian" },
+                { "cs-cz","Czech" },
+                { "da-dk", "Danish" },
+                { "de-de", "German" },
+                { "el-gr", "Greek" },
+                { "en-gb", "English (United Kingdom)" },
+                { "en-us", "English (United States)" },
+                { "es-es", "Spanish (Spain)" },
+                { "es-mx", "Spanish (Mexico)" },
+                { "et-ee", "Estonian" },
+                { "fi-fi", "Finnish" },
+                { "fr-ca", "French (Canada)" },
+                { "fr-fr", "French (France)" },
+                { "he-il", "Hebrew" },
+                { "hr-hr", "Croatian" },
+                { "hu-hu", "Hungarian" },
+                { "it-it", "Italian" },
+                { "ja-jp", "Japanese" },
+                { "ko-kr", "Korean" },
+                { "lt-lt", "Lithuanian" },
+                { "lv-lv", "Latvian" },
+                { "nb-no", "Norwegian (Bokmal)" },
+                { "nl-nl", "Dutch" },
+                { "pl-pl", "Polish" },
+                { "pt-br", "Portuguese (Brazil)" },
+                { "pt-pt", "Portuguese (Portugal)" },
+                { "ro-ro", "Romanian" },
+                { "ru-ru", "Russian" },
+                { "sk-sk", "Slovak" },
+                { "sl-si", "Slovenian" },
+                { "sr-latn-rs", "Serbian (Latin)" },
+                { "sv-se", "Swedish" },
+                { "th-th", "Thai" },
+                { "tr-tr", "Turkish" },
+                { "uk-ua", "Ukrainian" },
+                { "zh-cn", "Chinese (Simplified)" },
+                { "zh-hk", "Chinese (Hong Kong)" },
+                { "zh-tw", "Chinese (Traditional)" },
+            };
+
+        private Dictionary<string, string> Edition = new Dictionary<string, string>
+            {
+                { "CORE", "Windows Home" },
+                { "PROFESSIONAL","Windows Pro" },
+                { "COREN", "Windows Home N" },
+                { "PROFESSIONALN", "Windows Pro N"}
+            };
+
+        private Dictionary<string, string> ServerEdition = new Dictionary<string, string>
+            {
+                { "serverstandard", "Windows Server Standard" },
+                { "serverstandardcore", "Windows Server Standard (Core)"},
+                { "serverdatacenter", "Windows Server Datacenter" },
+                { "serverdatacentercore", "Windows Server Datacenter (Core)" },
+                { "serverturbine","Windows Server Datacenter: Azure Edition" },
+                { "serverturbinecore", "Windows Server Datacenter: Azure Edition (Core)" }
+            };
         public async Task GetBuildVersions()
         {
             string url = "https://api.uupdump.net/listid.php";
-
             try
             {
                 string response = await client.GetStringAsync(url);
@@ -133,15 +161,17 @@ namespace Galadarbs_IT23033.MVVM.View
                         string? title = build.GetProperty("title").GetString();
                         string? buildNumber = build.GetProperty("build").GetString();
                         string? architecture = build.GetProperty("arch").GetString();
+                        string? uuid = build.GetProperty("uuid").GetString();
+
 
                         string mainVersion;
-                        if (title.Contains("Windows 10"))
-                        {
-                            mainVersion = "Windows 10";
-                        }
-                        else if (title.Contains("Windows 11"))
+                        if (title.Contains("Windows 11"))
                         {
                             mainVersion = "Windows 11";
+                        }
+                        else if (title.Contains("Windows 10"))
+                        {
+                            mainVersion = "Windows 10";
                         }
                         else if (title.Contains("Windows Server"))
                         {
@@ -152,7 +182,17 @@ namespace Galadarbs_IT23033.MVVM.View
                             mainVersion = "Other";
                         }
 
-                        var buildData = new BuildData { Title = title, BuildNumber = buildNumber, Architecture = architecture };
+                        var buildData = new BuildData
+                        {
+                            Title = title,
+                            BuildNumber = buildNumber,
+                            Architecture = architecture,
+                            Uuid = uuid,
+                            Edition = string.Join(", ", Edition.Select(pvk => $"{pvk.Key}")),
+                            Lang = string.Join(", ", languages.Select(kvp => $"{kvp.Key}"))
+
+                            //Lang = string.Join(", ", languages.Select(kvp => $"{kvp.Key}: {kvp.Value}")) // Add all languages
+                        };
                         Builds.Add(buildData);
 
                         if (!BuildsByVersion.ContainsKey(mainVersion))
@@ -166,6 +206,8 @@ namespace Galadarbs_IT23033.MVVM.View
                     Dispatcher.Invoke(() =>
                     {
                         OperatingSystemComboBox.ItemsSource = mainVersions.ToList();
+                        LangCombo.ItemsSource = languages.Values.ToList();
+                        EditionCombo.ItemsSource = Edition.Values.ToList();
                     });
 
                     MessageBox.Show("Builds loaded successfully. Use the Combobox to access them.");
@@ -180,30 +222,162 @@ namespace Galadarbs_IT23033.MVVM.View
                 MessageBox.Show("Error fetching builds: " + ex.Message);
             }
         }
+        private bool isFiltering = false; // Flag to prevent multiple triggers
+
+        private CheckBox x86CheckBox; // Declare a variable for the dynamically added checkbox. This will be managed in codeline to avoid cluttering the xaml file.
 
         private void OperatingSystemComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (BuildsByVersion == null || OperatingSystemComboBox.SelectedItem == null)
-            {
-                return; // Exit if no builds or no item is selected
-            }
+            if (isFiltering) return; // Prevent re-entry during filtering
+            isFiltering = true;
 
-            string? selectedVersion = OperatingSystemComboBox.SelectedItem.ToString();
-
-            // Filter ListBox based on selected version. Dispatcher basically makes sure that the UI updates as it should, without throwing an exception. Win win!
-            Dispatcher.Invoke(() =>
+            try
             {
-                if (BuildsByVersion.TryGetValue(selectedVersion, out var filteredBuilds))
+                // Dynamically add x32 checkbox for Windows 10 and for updates in "Others" since some have the x86 tag. 
+                if (OperatingSystemComboBox.SelectedItem?.ToString() == "Windows 10" || OperatingSystemComboBox.SelectedItem?.ToString() == "Other")
                 {
-                    AvailableListBox.ItemsSource = filteredBuilds; // Show builds for selected version
+                    if (x86CheckBox == null) // Only add the checkbox if it doesn't already exist
+                    {
+                        x86CheckBox = new CheckBox
+                        {
+                            Name = "x86_chkbx",
+                            Content = "x86",
+                            Foreground = new SolidColorBrush(Colors.White),
+                            FontSize = 14,
+                        };
+
+                        //// Apply the style from XAML. 
+                        if (Application.Current.Resources.Contains("CheckboxStyle")) 
+                        {
+                            x86CheckBox.Style = (Style)Application.Current.Resources["CheckboxStyle"];
+                        }
+
+                        // Attach event handlers for the dynamically added checkbox
+                        x86CheckBox.Checked += FilterCheckbox_Changed;
+                        x86CheckBox.Unchecked += FilterCheckbox_Changed;
+
+                        // Add the checkbox to the StackPanel
+                        ArchitecturePanel.Children.Add(x86CheckBox);
+                    }
+                }
+                else if (x86CheckBox != null) // Remove the x32 checkbox if a different OS is selected
+                {
+                    ArchitecturePanel.Children.Remove(x86CheckBox);
+                    x86CheckBox = null; // Reset the variable
+                }
+
+                // Check if a version is selected before proceeding
+                if (OperatingSystemComboBox.SelectedItem == null)
+                {
+                    MessageBox.Show("Filter will not be applied due to the list being empty.\nPopulate the list first and then select your desired operating system.",
+                                    "List empty", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Reset the checkboxes
+                    AMD64_chkbx.IsChecked = false;
+                    ARM64_chkbx.IsChecked = false;
+                    if (x86CheckBox != null) x86CheckBox.IsChecked = false;
+
+                    // Clear the ListBox
+                    AvailableListBox.ItemsSource = null;
+                    return; // Exit the method
+                }
+
+                string selectedVersion = OperatingSystemComboBox.SelectedItem.ToString();
+
+                if (selectedVersion == "Windows Server")
+                {
+                    EditionCombo.ItemsSource = ServerEdition.Values.ToList(); // Use Server Editions
                 }
                 else
                 {
-                    AvailableListBox.ItemsSource = null; // Clear ListBox if no builds found
+                    EditionCombo.ItemsSource = Edition.Values.ToList(); // Use Default Editions
                 }
-            });
+
+                Dispatcher.Invoke(() =>
+                {
+                    if (BuildsByVersion.TryGetValue(selectedVersion, out var filteredBuilds))
+                    {
+                        var finalFilteredBuilds = new List<BuildData>();
+
+                        foreach (var build in filteredBuilds)
+                        {
+                            bool addBuild = false;
+
+                            if (AMD64_chkbx.IsChecked == true && build.Architecture == "amd64")
+                            {
+                                addBuild = true;
+                            }
+                            else if (ARM64_chkbx.IsChecked == true && build.Architecture == "arm64")
+                            {
+                                addBuild = true;
+                            }
+                            else if (x86CheckBox?.IsChecked == true && build.Architecture == "x86")
+                            {
+                                addBuild = true;
+                            }
+                            else if (AMD64_chkbx.IsChecked != true && ARM64_chkbx.IsChecked != true && (x86CheckBox?.IsChecked != true))
+                            {
+                                addBuild = true; // Add all builds if no checkbox is selected
+                            }
+
+                            // Check if both AMD64 and ARM64 are selected, but only when x86 checkbox is NOT visible
+                            if (AMD64_chkbx.IsChecked == true && ARM64_chkbx.IsChecked == true && (x86CheckBox == null || !x86CheckBox.IsVisible))
+                            {
+                                var result = MessageBox.Show("You cannot select both AMD64 and ARM64 at the same time. Showing all builds instead.",
+                                                             "Invalid Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                                if (result == MessageBoxResult.OK)
+                                {
+                                    AMD64_chkbx.IsChecked = false;
+                                    ARM64_chkbx.IsChecked = false;
+                                    if (x86CheckBox != null) x86CheckBox.IsChecked = false;
+
+                                    AvailableListBox.ItemsSource = filteredBuilds; // Show all builds
+                                }
+                                return;
+                            }
+
+                            // Check if AMD64, ARM64, and x86 are all selected
+                            if (AMD64_chkbx.IsChecked == true && ARM64_chkbx.IsChecked == true && x86CheckBox?.IsChecked == true)
+                            {
+                                var result = MessageBox.Show("You cannot select AMD64, ARM64, and x86 at the same time. Showing all builds instead.",
+                                                             "Invalid Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                                if (result == MessageBoxResult.OK)
+                                {
+                                    AMD64_chkbx.IsChecked = false;
+                                    ARM64_chkbx.IsChecked = false;
+                                    if (x86CheckBox != null) x86CheckBox.IsChecked = false;
+
+                                    AvailableListBox.ItemsSource = filteredBuilds; // Show all builds
+                                }
+                                return;
+                            }
+
+                            if (addBuild)
+                            {
+                                finalFilteredBuilds.Add(build);
+                            }
+                        }
+
+                        AvailableListBox.ItemsSource = finalFilteredBuilds;
+                    }
+                    else
+                    {
+                        AvailableListBox.ItemsSource = null;
+                    }
+                });
+            }
+            finally
+            {
+                isFiltering = false; // Reset the flag after execution
+            }
         }
 
+        private void FilterCheckbox_Changed(object sender, RoutedEventArgs e)
+        {
+            OperatingSystemComboBox_SelectionChanged(null, null); // Reapply filtering logic
+        }
         // Define the BuildData class
         public class BuildData
         {
@@ -211,8 +385,13 @@ namespace Galadarbs_IT23033.MVVM.View
             public string? BuildNumber { get; set; }
             public string? Architecture { get; set; }
 
+            public string? Uuid { get; set; }
+            public string? Lang { get; set; }
+            public string? Edition { get; set; }
+
             public override string ToString()
             {
+
                 return $"{Title} - {BuildNumber} ({Architecture})";
             }
         }
@@ -222,22 +401,159 @@ namespace Galadarbs_IT23033.MVVM.View
             await GetBuildVersions();
         }
 
-        private void AMDCheckBox_Toggled(object sender, RoutedEventArgs e)
+        
+        private async void Debug_Click(object sender, RoutedEventArgs e)
         {
+            // Get selected language and edition
+            string? selectedLanguageDisplay = "Not Selected";
+            if (LangCombo.SelectedItem != null)
+            {
+                selectedLanguageDisplay = LangCombo.SelectedItem as string;
+            }
 
+            string? selectedEditionDisplay = "Not Selected";
+            if (EditionCombo.SelectedItem != null)
+            {
+                selectedEditionDisplay = EditionCombo.SelectedItem as string;
+            }
+
+            // Determine the download type
+            string downloadType = "Browser / File";
+            if (CopyToClipboardCheckbox.IsChecked == true)
+            {
+                downloadType = "URL to Clipboard";
+            }
+
+            // Get the selected build
+            if (AvailableListBox.SelectedItem is BuildData selectedBuild)
+            {
+                // Display build details including the download type
+                string buildInfo = $"Build Information:\n" +
+                                   $"- Name: {selectedBuild.Title}\n" +
+                                   $"- Architecture: {selectedBuild.Architecture}\n" +
+                                   $"- Edition: {selectedEditionDisplay}\n" +
+                                   $"- Language: {selectedLanguageDisplay}\n" +
+                                   $"- Download Type: {downloadType}";
+
+                MessageBox.Show(buildInfo, "Build Details", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("No build is selected. Please select a build from the list.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+      
+        private async void Downloadbtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Call the function to handle all operations
+            HandleDownload(LangCombo, EditionCombo, AvailableListBox, CopyToClipboardCheckbox, OperatingSystemComboBox);
         }
 
-        private void ARMCheckBox_Toggled(object sender, RoutedEventArgs e)
+        private void HandleDownload(ComboBox languageCombo, ComboBox editionCombo, ListBox buildListBox, CheckBox clipboardCheckbox, ComboBox operatingSystemComboBox)
         {
+            // Validate selections
+            var selectedLanguageDisplay = languageCombo.SelectedItem as string;
+            var selectedEditionDisplay = editionCombo.SelectedItem as string;
+            var selectedOperatingSystem = operatingSystemComboBox.SelectedItem as string;
 
-        }
-        private void AMDCheckBox_Untoggled(object sender, RoutedEventArgs e)
-        {
+            if (string.IsNullOrEmpty(selectedLanguageDisplay) || string.IsNullOrEmpty(selectedEditionDisplay) || string.IsNullOrEmpty(selectedOperatingSystem))
+            {
+                MessageBox.Show("Please select a language, an edition, and an operating system before proceeding.",
+                                "Selection Required",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return; // Exit if validation fails
+            }
 
-        }
-        private void ARMCheckBox_Untoggled(object sender, RoutedEventArgs e)
-        {
+            // Retrieve the correct dictionary based on the operating system
+            Dictionary<string, string> selectedEditionDictionary = selectedOperatingSystem == "Windows Server" ? ServerEdition : Edition;
 
+            // Retrieve codes based on the selected display names
+            string selectedLanguageCode = languages.FirstOrDefault(kvp => kvp.Value == selectedLanguageDisplay).Key;
+            string selectedEditionCode = selectedEditionDictionary.FirstOrDefault(kvp => kvp.Value == selectedEditionDisplay).Key;
+
+            if (string.IsNullOrEmpty(selectedLanguageCode) || string.IsNullOrEmpty(selectedEditionCode))
+            {
+                MessageBox.Show("Invalid language or edition selection. Please select valid options.",
+                                "Invalid Selection",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return; // Exit if codes are invalid
+            }
+
+            if (buildListBox.SelectedItem is BuildData selectedBuild)
+            {
+                if (string.IsNullOrEmpty(selectedBuild.Uuid))
+                {
+                    MessageBox.Show("The selected build does not have a UUID.", "Invalid Build", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Construct the URL
+                string baseUrl = "https://uupdump.net/download.php";
+                string url = $"{baseUrl}?id={selectedBuild.Uuid}&pack={selectedLanguageCode}&edition={selectedEditionCode}";
+
+                if (clipboardCheckbox.IsChecked == true)
+                {
+                    Clipboard.SetText(url);
+                    MessageBox.Show($"Constructed URL copied to clipboard:\n{url}", "URL Copied", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    // Prompt the user for actions
+                    var result = MessageBox.Show(
+                        "Would you like to open the download link in your browser?",
+                        "Open or Save URL",
+                        MessageBoxButton.YesNoCancel,
+                        MessageBoxImage.Question
+                    );
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Open the URL in the default browser
+                        try
+                        {
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = url,
+                                UseShellExecute = true
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Failed to open the URL: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else if (result == MessageBoxResult.No)
+                    {
+                        // Save the URL to a file
+                        var saveFileDialog = new Microsoft.Win32.SaveFileDialog
+                        {
+                            Title = "Save Download Link",
+                            Filter = "Text File (*.txt)|*.txt",
+                            FileName = "DownloadLink.txt"
+                        };
+
+                        if (saveFileDialog.ShowDialog() == true)
+                        {
+                            try
+                            {
+                                System.IO.File.WriteAllText(saveFileDialog.FileName, url);
+                                MessageBox.Show("URL saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Failed to save the file: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a build from the list.", "No Build Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
     }
 }

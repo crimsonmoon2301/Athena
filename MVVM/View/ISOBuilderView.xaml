@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:Galadarbs_IT23033.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="10">
+    <Grid Margin="5">
         <!-- Grid Layout -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.2*"/>
+            <ColumnDefinition Width="0.55*"/>
+            <ColumnDefinition Width="1.2*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -21,44 +21,41 @@
 
         <!-- Operating System Selection ListBox -->
         <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
-            <TextBlock Text="Select Operating System:" Foreground="White" HorizontalAlignment="Center"/>
+            <TextBlock Text="Select Operating System:" Foreground="White" HorizontalAlignment="Center" FontSize="14"/>
             <ComboBox Name="OperatingSystemComboBox" Width="260" Height="25" SelectionChanged="OperatingSystemComboBox_SelectionChanged"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-            <TextBlock Text="Select Architecture:" Foreground="White" HorizontalAlignment="Center"/>
-            <CheckBox Content="AMD64" Name="amd64" Checked="AMDCheckBox_Toggled" Unchecked="AMDCheckBox_Untoggled" Foreground="White"/>
-            <CheckBox Content="ARM64" Name="arm64" Checked="ARMCheckBox_Toggled" Unchecked="ARMCheckBox_Untoggled" Foreground="White"/>
+        <StackPanel Name="ArchitecturePanel" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,30" Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Select Arhitecture" Foreground="White" HorizontalAlignment="Center" FontSize="14"/>
+            <CheckBox Name="AMD64_chkbx" Content="AMD64" Foreground="White" FontSize="14" Checked="FilterCheckbox_Changed" Unchecked="FilterCheckbox_Changed"/>
+            <CheckBox Name="ARM64_chkbx" Content="ARM64" Foreground="White" FontSize="14" Checked="FilterCheckbox_Changed" Unchecked="FilterCheckbox_Changed"/>
         </StackPanel>
 
         <!-- Available Options ListBox with Advanced Options below it -->
-        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
-            <TextBlock Text="Available Options:" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-            <ListBox Name="AvailableListBox" ItemsSource="{Binding AvailableOptions}" Width="260" Height="250"/>
-
-            <StackPanel Name="AdvancedOptionsPanel" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Grid.Row="2" Grid.Column="0">
-                <CheckBox Content="Compress as ESD" Foreground="White"/>
-                <CheckBox Content="Option 2" Foreground="White"/>
-                <CheckBox Content="Option 3" Foreground="White"/>
-            </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <TextBlock Text="Available Options:" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center" FontSize="14"/>
+            <ListBox Name="AvailableListBox" ItemsSource="{Binding AvailableOptions}" Width="300" Height="340"/>
         </StackPanel>
+        
         <!-- Controls Column -->
-        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Content="Test API?" Click="TestAPI_Click" Margin="5" />
-            <Button Content="Add" Name="AddButton" Margin="5" Click="AddButton_Click"/>
-            <Button Content="Remove" Name="RemoveButton" Margin="5" Click="RemoveButton_Click"/>
-            <Button Content="Populate list" Name="GetBuilds" Margin="5" Click="GetBuilds_Click"/>
-            <CheckBox Content="Show Advanced Options" Name="ShowAdvancedOptionsCheckbox" 
-                      Checked="ShowAdvancedOptionsCheckbox_Checked" 
-                      Unchecked="ShowAdvancedOptionsCheckbox_Unchecked" 
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="60" Width="200">
+            <Button Content="Download selected build" Name="Downloadbtn" Margin="5" FontSize="14" Click="Downloadbtn_Click"/>
+            <Button Content="Check API" Click="TestAPI_Click" Margin="5" FontSize="14" />
+            <Button Content="Populate list" Name="GetBuilds" Margin="5" Click="GetBuilds_Click" FontSize="14"/>
+            <Button Content="Show selected options" Name="Debug" Margin="5" FontSize="14" Click="Debug_Click"/>
+            <CheckBox Content="Copy URL to clipboard" Name="CopyToClipboardCheckbox"   
                       Foreground="White"
-                      Margin="5"/>
+                      Margin="5"
+                      FontSize="14"/>
         </StackPanel>
 
-        <!-- Selected Options ListBox -->
+        <!-- Languages & editions -->
         <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top">
-            <TextBlock Text="Selected Options:" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-            <ListBox Name="SelectedListBox" ItemsSource="{Binding SelectedOptions}" Width="260" Height="250"/>
+            <TextBlock Text="Select language" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center" FontSize="14"/>
+            <ComboBox Name="LangCombo" Width="250" Height="25" SelectedItem="{Binding SelectedLanguage}"/>
+            
+            <TextBlock Text="Select Edition" Foreground="White" Margin="0,30,0,0" HorizontalAlignment="Center" FontSize="14"/>
+            <ComboBox Name="EditionCombo" Width="250" Height="25" Margin="10" SelectedItem="{Binding SelectedEdition}"/>
         </StackPanel>
     </Grid>
 </UserControl>
