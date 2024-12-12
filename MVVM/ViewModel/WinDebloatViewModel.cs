@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -184,31 +185,66 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             {
                 try
                 {
-                    // Create the process to run PowerShell as admin
+                    // Create a temporary PowerShell script and log file
+                    string tempScriptPath = Path.Combine(Path.GetTempPath(), "uninstall_package.ps1");
+                    string tempLogPath = Path.Combine(Path.GetTempPath(), "uninstall_log.txt");
+
+                    // Write PowerShell script to temporary file. I don't know how the hell this works, but it does. And I love it.
+                    string scriptContent = $@"
+                           $logFile = '{tempLogPath}'
+                           $package = Get-AppxPackage -AllUsers -Name '{package.Name}' -ErrorAction SilentlyContinue
+                                if ($null -ne $package) {{
+                                    {package.Command}
+                                    'Uninstallation successful.' | Out-File -FilePath $logFile -Encoding utf8
+                                }} else {{
+                                    'Package not found.' | Out-File -FilePath $logFile -Encoding utf8
+                                }}";
+                    File.WriteAllText(tempScriptPath, scriptContent);
+
+                    // Configure process to run PowerShell as admin
                     var process = new System.Diagnostics.Process();
                     process.StartInfo.FileName = "powershell.exe";
-                    process.StartInfo.Arguments = $" {package.Command}";
-                    process.StartInfo.Verb = "runas"; // Elevates process to admin
-                    process.StartInfo.UseShellExecute = true; // Required for Verb = "runas"
-                    process.StartInfo.CreateNoWindow = false;
+                    process.StartInfo.Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{tempScriptPath}\"";
+                    process.StartInfo.Verb = "runas"; // Elevate to admin
+                    process.StartInfo.UseShellExecute = true; // Needed for elevation
+                    process.StartInfo.CreateNoWindow = true;
 
+                    // Start the process and wait for it to complete
                     process.Start();
-
-                    // Since we're running as admin, output capture won't work unless redirected to a file
                     process.WaitForExit();
+
+                    // Read the log file for results
+                    string output = File.Exists(tempLogPath) ? File.ReadAllText(tempLogPath).Trim() : "";
+
+                    // Determine the result based on output
+                    if (output.Contains("Package not found"))
+                    {
+                        MessageBox.Show($"The package '{package.Name}' is not installed.");
+                    }
+                    else if (output.Contains("Uninstallation successful"))
+                    {
+                        MessageBox.Show($"The package '{package.Name}' has been successfully uninstalled.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unexpected result. Please try again.");
+                    }
+
+                    // Clean up temporary files
+                    File.Delete(tempScriptPath);
+                    if (File.Exists(tempLogPath))
+                        File.Delete(tempLogPath);
                 }
                 catch (Exception ex)
                 {
-                    // Log any exceptions for debugging
-                    System.Windows.MessageBox.Show($"An error occurred: {ex.Message}");
+                    MessageBox.Show($"An error occurred: {ex.Message}");
                 }
             }
             else
             {
-                System.Windows.MessageBox.Show($"Something went horribly wrong. Process halted!");
+                MessageBox.Show("Invalid package or missing uninstall command.");
             }
         }
-
 
         // JSON Classes
         public class PackageInfo
