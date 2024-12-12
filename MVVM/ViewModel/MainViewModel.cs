@@ -31,6 +31,9 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         // Downloader property
         public RelayCommand DownloaderViewCommand {  get; set; }
 
+        // Windows Debloater propety
+        public RelayCommand WinDebloatViewCommand { get; set; }
+
         // defining the views to their appropiate view models, get set helps assign properties
         public HomeViewModel HomeVm { get; set; }
         public MaintainViewModel MaintainVm { get; set; }
@@ -47,7 +50,7 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
 
         public CompDiagnosticViewModel  CompDiagVm {  get; set; }
 
-        public OSTunerViewModel OSTunerVm {  get; set; }
+        public WinDebloatViewModel WinDebVm { get; set; }
 
         private object _currentView;
 
@@ -70,8 +73,8 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             ISOBuildVm = new ISOBuilderViewModel();
             AboutVm = new AboutViewModel();
             CompDiagVm = new CompDiagnosticViewModel();
-            OSTunerVm = new OSTunerViewModel();
             DownloadVm = new DownloadViewModel();
+            WinDebVm = new WinDebloatViewModel();
             CurrentView = HomeVm;
 
             HomeViewCommand = new RelayCommand(o =>
@@ -109,14 +112,14 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
                 CurrentView = CompDiagVm;
             });
 
-            OSTunerViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = OSTunerVm;
-            });
-
             DownloaderViewCommand = new RelayCommand(o =>
             {
                 CurrentView = DownloadVm;
+            });
+
+            WinDebloatViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = WinDebVm;
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Galadarbs_IT23033.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,14 @@ using System.Windows.Shapes;
 namespace Galadarbs_IT23033.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for OSTunerView.xaml
+    /// Interaction logic for WinDebloatView.xaml
     /// </summary>
-    public partial class OSTunerView : UserControl
+    public partial class WinDebloatView : UserControl
     {
-        public OSTunerView()
+        public WinDebloatView()
         {
             InitializeComponent();
+            DataContext = new WinDebloatViewModel();
         }
     }
 }

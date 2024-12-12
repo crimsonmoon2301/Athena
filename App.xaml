@@ -44,6 +44,11 @@
             <DataTemplate DataType="{x:Type viewModel:CompDiagnosticViewModel}">
                 <view:CompDiagnosticView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:WinDebloatViewModel}">
+                <view:WinDebloatView/>
+            </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

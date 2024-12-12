@@ -16,7 +16,7 @@
             <Button Style="{StaticResource RoundButtonO}"
                     Content="Windows Debloater"
                     Margin="10" Name="WinDeb_btn"
-                    Command="{Binding DataContext.RegViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                    Command="{Binding DataContext.WinDebloatViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
             <Button Style="{StaticResource RoundButtonR}"
                     Content="Registry tweaker"
