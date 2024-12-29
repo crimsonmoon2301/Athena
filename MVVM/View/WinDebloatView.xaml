@@ -14,13 +14,19 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Menu -->
-            <Menu Background="#394B59" Foreground="White" Grid.Row="0" Margin="0,0,0,10">
-                <MenuItem Header="Default Debloat" Command="{Binding DefaultDebloatCommand}" FontSize="14" />
-                <MenuItem Header="Custom Debloat" Command="{Binding CustomDebloatCommand}" FontSize="14" />
-                <MenuItem Header="Uninstall selected option" Command="{Binding UninstallCommand}" CommandParameter="{Binding SelectedPackage}" FontSize="14" />
-                <MenuItem Header="View Logs" Command="{Binding ViewLogsCommand}" FontSize="14" />
-            </Menu>
+            <Grid Background="#394B59" Grid.Row="0" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Menu Background="Transparent" Foreground="White" Grid.Column="1" HorizontalAlignment="Center">
+                    <MenuItem Header="Uninstall selected option" Command="{Binding UninstallCommand}" CommandParameter="{Binding SelectedPackage}" FontSize="18" Margin="10"/>
+                    <MenuItem Header="View Logs" Command="{Binding ViewLogsCommand}" FontSize="18" Margin="10"/>
+                </Menu>
+                <TextBlock Text="Removes only items from MS Store!" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
 
             <!-- Content Area -->
             <Grid Grid.Row="1">
@@ -41,6 +47,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="5">
                                     <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Black" />
+                                    <TextBlock Text="{Binding packName}" FontStyle="Italic" Foreground="Gray"/>
                                     <TextBlock Text="{Binding Description}" Foreground="Gray" FontStyle="Italic" />
                                     <TextBlock Text="{Binding Tip}" Foreground="Black" />
                                 </StackPanel>
@@ -61,6 +68,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="5">
                                     <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Black" />
+                                    <TextBlock Text="{Binding packName}" FontStyle="Italic" Foreground="Gray"/>
                                     <TextBlock Text="{Binding Description}" Foreground="Gray" FontStyle="Italic" />
                                     <TextBlock Text="{Binding Tip}" Foreground="Black" />
                                 </StackPanel>

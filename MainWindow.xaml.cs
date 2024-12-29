@@ -55,21 +55,10 @@ namespace Galadarbs_IT23033
             if (warningMessage == MessageBoxResult.Yes)
             {
                 MessageBoxResult confirmMessage = MessageBox.Show(
-                "Are you REALLY sure?",
-                "Confirmation",
-                MessageBoxButton.YesNo,
+                "It is recommended to make a system restore point from here on out.",
+                "Proceed at your own risk",
+                MessageBoxButton.OK,
                 MessageBoxImage.Question);
-                if (confirmMessage == MessageBoxResult.No)
-                {
-                    MessageBox.Show("You cannot use this program. Closing now.", "Access Denied", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    Application.Current.Shutdown();
-                    return false; // Exit early if the user does not want to proceed
-                }
-                if (confirmMessage == MessageBoxResult.Yes)
-                {
-                    MessageBox.Show("It's recommended to make a system restore point before applying any changes this program generates.", "Success", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return confirmMessage == MessageBoxResult.Yes;
-                }
             }
             return false;
         }
