@@ -29,9 +29,9 @@
 
         <!-- Data Grid -->
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" HeadersVisibility="Column" Background="#444444" 
-          Foreground="White" BorderBrush="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+          Foreground="White" BorderBrush="Transparent" Height="335" VerticalAlignment="Stretch"
           RowBackground="#2C2C2C" AlternatingRowBackground="#3C3C3C" FontSize="16" FontWeight="SemiBold"
-          ItemsSource="{Binding Downloads}" Margin="0,10,0,10" MouseRightButtonUp="DataGrid_MouseRightButtonUp" CanUserAddRows="False">
+          ItemsSource="{Binding Downloads}" SelectedItem="{Binding SelectedDownload}" Margin="0,10,0,10" MouseRightButtonUp="DataGrid_MouseRightButtonUp" CanUserAddRows="False">
             <DataGrid.Resources>
                 <!-- Style for Column Headers -->
                 <Style TargetType="DataGridColumnHeader">

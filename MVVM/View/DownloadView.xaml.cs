@@ -35,16 +35,40 @@ namespace Galadarbs_IT23033.MVVM.View
             if (sender is DataGrid dataGrid && dataGrid.SelectedItem is DownloadViewModel.DownloadItem clickedRow)
             {
                 // Check if the Info property exists and display it
-                string infoMessage = clickedRow.Info ?? "No information available.";
+                string infoMessage;
+                if (clickedRow.Info == null)
+                {
+                    infoMessage = "No information available.";
+                }
+                else
+                {
+                    infoMessage = clickedRow.Info;
+                }
                 MessageBox.Show(infoMessage, "Product Info", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 // Check if the Mirror1 property exists and display it
-                string mirrorMessage = clickedRow.Mirror1 ?? "No Download link available.";
+                string mirrorMessage;
+                if (clickedRow.Mirror1 == null)
+                {
+                    mirrorMessage = "No Download link available.";
+                }
+                else
+                {
+                    mirrorMessage = clickedRow.Mirror1;
+                }
                 MessageBox.Show(mirrorMessage, "Download Link (Online)", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                string mirrorMessage1 = clickedRow.Mirror2 ?? "No Download link available.";
+                // Check if the Mirror2 property exists and display it
+                string mirrorMessage1;
+                if (clickedRow.Mirror2 == null)
+                {
+                    mirrorMessage1 = "No Download link available.";
+                }
+                else
+                {
+                    mirrorMessage1 = clickedRow.Mirror2;
+                }
                 MessageBox.Show(mirrorMessage1, "Download Link (Offline)", MessageBoxButton.OK, MessageBoxImage.Information);
-
             }
             else
             {

@@ -7,7 +7,7 @@ namespace Galadarbs_IT23033.Core
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null, string value = null)
+        protected void OnPropertyChanged([CallerMemberName] string? name = null, string? value = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
