@@ -21,3 +21,7 @@ Athena is a C# app built in WPF that allows you to do basically anything you wan
   * The app is based around .NET 8.0 which is the LTS version in Windows.
   * Windows 10 and 11 is supported. Older versions are untested.
   * No standalone program available yet as this is highly WIP.
+
+## External sources that the program uses for functionality
+
+EXT (External) repository with files inside. URL: https://github.com/crimsonmoon2301/AthenaEXT.git
