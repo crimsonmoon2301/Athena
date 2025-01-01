@@ -50,7 +50,7 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
 
         public CompDiagnosticViewModel  CompDiagVm {  get; set; }
 
-        public WinDebloatViewModel WinDebVm { get; set; }
+        public WinDebloatViewModel WinDebVm { get; set; } 
 
         private object _currentView;
 

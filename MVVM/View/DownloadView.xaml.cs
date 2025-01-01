@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Galadarbs_IT23033.MVVM.ViewModel;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,50 +29,28 @@ namespace Galadarbs_IT23033.MVVM.View
             InitializeComponent();
         }
 
-        private async void DownloadButton_Click(object sender, RoutedEventArgs e)
+        private void DataGrid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (AvailableListBox.SelectedItem == null)
+            // Get the clicked DataGrid row
+            if (sender is DataGrid dataGrid && dataGrid.SelectedItem is DownloadViewModel.DownloadItem clickedRow)
             {
-                MessageBox.Show("Please select a build from the list.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                // Check if the Info property exists and display it
+                string infoMessage = clickedRow.Info ?? "No information available.";
+                MessageBox.Show(infoMessage, "Product Info", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Check if the Mirror1 property exists and display it
+                string mirrorMessage = clickedRow.Mirror1 ?? "No Download link available.";
+                MessageBox.Show(mirrorMessage, "Download Link (Online)", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                string mirrorMessage1 = clickedRow.Mirror2 ?? "No Download link available.";
+                MessageBox.Show(mirrorMessage1, "Download Link (Offline)", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
-
-            string selectedBuild = AvailableListBox.SelectedItem.ToString();
-            string downloadUrl = $"https://msdl.gravesoft.dev/"; // Adjust URL structure as needed
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            else
             {
-                FileName = $"{selectedBuild}.iso",
-                Filter = "ISO Files (*.iso)|*.iso|All Files (*.*)|*.*"
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                try
-                {
-                    await DownloadFileAsync(downloadUrl, saveFileDialog.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Download failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                // Optional: Message if no row was clicked
+                MessageBox.Show("Please select a valid item to view information.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-        }
-
-        private async Task DownloadFileAsync(string url, string destinationPath)
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-                response.EnsureSuccessStatusCode();
-
-                using (var fs = new FileStream(destinationPath, FileMode.Create))
-                {
-                    await response.Content.CopyToAsync(fs);
-                }
-            }
-
-            MessageBox.Show("Download completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

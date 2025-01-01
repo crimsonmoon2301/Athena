@@ -16,8 +16,8 @@ namespace Galadarbs_IT23033.MVVM.View
         private DispatcherTimer timer;
         private PerformanceCounter cpuCounter;
         private PerformanceCounter ramCounter;
-        private bool dialogShown = false; // Add a check so that the dialog doesn't pop up every second after being clicked.
-        private object RegViewCommand;
+        //private bool dialogShown = false; // Add a check so that the dialog doesn't pop up every second after being clicked.
+        //private object RegViewCommand;
 
         public OSModView()
         {
@@ -118,11 +118,6 @@ namespace Galadarbs_IT23033.MVVM.View
                     break;
             }
             return versionName;
-        }
-
-        private void WinDeb_btn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

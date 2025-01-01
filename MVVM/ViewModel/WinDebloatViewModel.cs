@@ -90,7 +90,7 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         // Load JSON data from the GitHub URL
         private async void LoadPackageDataAsync()
         {
-            string url = "https://raw.githubusercontent.com/crimsonmoon2301/AthenaJSON/main/getpackages.json";
+            string url = "https://raw.githubusercontent.com/crimsonmoon2301/AthenaEXT/main/getpackages.json";
 
             try
             {
@@ -282,22 +282,22 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
         // JSON Classes
         public class PackageInfo
         {
-            public string Name { get; set; }
-            public string packName { get; set; }
-            public string Description { get; set; }
-            public string Tip { get; set; }
-            public string Command { get; set; }
+            public string? Name { get; set; }
+            public string? packName { get; set; }
+            public string? Description { get; set; }
+            public string? Tip { get; set; }
+            public string? Command { get; set; }
         }
 
         private class PackagesWrapper
         {
-            public Packages Packages { get; set; }
+            public Packages? Packages { get; set; }
         }
 
         public class Packages
         {
-            public List<PackageInfo> SafeToRemove { get; set; }
-            public List<PackageInfo> MayCauseBreakages { get; set; }
+            public List<PackageInfo>? SafeToRemove { get; set; }
+            public List<PackageInfo>? MayCauseBreakages { get; set; }
         }
     }
 }
