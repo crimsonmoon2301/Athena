@@ -10,14 +10,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Abstract\bg1.png" />
+    <None Remove="Images\Abstract\bg2.png" />
+    <None Remove="Images\Abstract\bg3.png" />
+    <None Remove="Images\Abstract\bg4.png" />
+    <None Remove="Images\Abstract\bg5.png" />
     <None Remove="Images\bg.png" />
     <None Remove="Images\bg1.png" />
     <None Remove="Images\bg2.png" />
     <None Remove="Images\bg3.jpg" />
     <None Remove="Images\bg4.jpg" />
     <None Remove="Images\bg5.jpg" />
+    <None Remove="Images\Binary\bg1.png" />
+    <None Remove="Images\Binary\bg2.png" />
+    <None Remove="Images\Binary\bg3.png" />
+    <None Remove="Images\Binary\bg4.png" />
+    <None Remove="Images\Binary\bg5.png" />
+    <None Remove="Images\Cyber\bg2.png" />
+    <None Remove="Images\Cyber\bg3.png" />
+    <None Remove="Images\Cyber\bg4.png" />
+    <None Remove="Images\Cyber\bg5.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\move.png" />
+    <None Remove="Images\Phantom\bg1.png" />
+    <None Remove="Images\Phantom\bg2.png" />
+    <None Remove="Images\Phantom\bg3.png" />
+    <None Remove="Images\Phantom\bg4.png" />
+    <None Remove="Images\Phantom\bg5.png" />
     <None Remove="Images\power.png" />
     <None Remove="Images\power1.png" />
   </ItemGroup>
@@ -28,9 +47,37 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\bg.png" />
-    <Resource Include="Images\bg1.png" />
-    <Resource Include="Images\bg2.png">
+    <Resource Include="Images\Abstract\bg1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Abstract\bg2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Abstract\bg3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Abstract\bg4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Abstract\bg5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Binary\bg1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Binary\bg2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Binary\bg3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Binary\bg4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Binary\bg5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cyber\bg1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\bg3.jpg">
@@ -42,10 +89,37 @@
     <Resource Include="Images\bg5.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Cyber\bg2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cyber\bg3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cyber\bg4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cyber\bg5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\move.png" />
+    <Resource Include="Images\Phantom\bg1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Phantom\bg2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Phantom\bg3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Phantom\bg4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Phantom\bg5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\power.png" />
     <Resource Include="Images\power1.png" />
   </ItemGroup>

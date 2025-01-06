@@ -30,14 +30,10 @@
                 Storyboard.TargetProperty="Opacity"
                 From="0.0" To="1.0" Duration="0:0:1" />
         </Storyboard>
-        <ImageBrush x:Key="Wallpaper1" ImageSource="Images/bg2.png" />
-        <ImageBrush x:Key="Wallpaper2" ImageSource="Images/bg3.jpg" />
-        <ImageBrush x:Key="Wallpaper3" ImageSource="Images/bg4.jpg" />
-        <ImageBrush x:Key="Wallpaper4" ImageSource="Images/bg5.jpg" />
-
+        
     </Window.Resources>
     <Border CornerRadius="10">
-        <Grid Name="MainGrid" Background="{StaticResource Wallpaper1}">
+        <Grid Name="MainGrid" Background="{DynamicResource Wallpaper1}" Opacity="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
@@ -47,6 +43,7 @@
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Rectangle Fill="Black" Opacity="0.55" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,0"/>
 
             <TextBlock Text="Athena"
                        VerticalAlignment="Center"
@@ -55,13 +52,16 @@
                        FontSize="24"
                        Margin="10"
                        FontFamily="Cascadia Mono"/>
+            <TextBlock Text="Wallpaper Theme:" FontSize="20" Foreground="White" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="220,0,0,0"/>
+            <ComboBox x:Name="ThemeSelector" SelectionChanged="ThemeSelector_SelectionChanged" Width="150" Margin="10" Grid.Column="2" Height="25">
+            </ComboBox>
             <Button Name="ExitButton" Width="40" Height="36" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,40,10" BorderThickness="0"
                     Background="Transparent" Click="ExitButton_Click">
                 <Image Source="Images/power.png" Width="38" Height="32" Margin="0,0,5,0"/>
             </Button>
             <Button Name="ChangeWall_btn" Width="40" Height="36" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,100,10" BorderThickness="0"
                     Background="Transparent" Click="ChangeWall_btn_Click">
-                <Image Source="Images/move.png" Width="38" Height="32" Margin="0,0,5,0" RenderTransformOrigin="0.513,0.5"/>
+                <Image Source="Images/move.png" Width="38" Height="32" Margin="0,0,0,0" RenderTransformOrigin="0.513,0"/>
             </Button>
 
             <StackPanel Grid.Row="1" Name="RadioButtonPanel">
@@ -104,7 +104,6 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Content="{Binding CurrentView}"/>
-
         </Grid>
     </Border>
 </Window>

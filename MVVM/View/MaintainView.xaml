@@ -9,7 +9,7 @@
     <UniformGrid>
         <UniformGrid Columns="2" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150">
             <Button Style="{StaticResource RoundButtonV}"
-                    Content="Computer diagnostics"
+                    Content="View System Cache"
                     Margin="10"
                     Command="{Binding DataContext.CompDiagnosticViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
 

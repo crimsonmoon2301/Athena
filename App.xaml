@@ -12,6 +12,10 @@
                 <ResourceDictionary Source="Theme/ButtonColorPaletteFormat.xaml"/>
                 <ResourceDictionary Source="Theme/TooolbarColorTheme.xaml"/>
                 <ResourceDictionary Source="Theme/CheckboxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/AbstractTheme.xaml"/>
+                <ResourceDictionary Source="Theme/PhantomTheme.xaml"/>
+                <ResourceDictionary Source="Theme/CyberTheme.xaml"/>
+                <ResourceDictionary Source="Theme/BinaryTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>

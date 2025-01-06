@@ -9,5 +9,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
 {
     internal class ISOBuilderViewModel : ObservableObject
     {
+
     }
 }

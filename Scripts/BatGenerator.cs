@@ -38,6 +38,8 @@ namespace Galadarbs_IT23033.Scripts
                             writer.WriteLine(":: ----------------------------------------------------------");
                             break;
                         case "Remove OneDrive":
+                            writer.WriteLine("echo ---Disable OneDrive Reinstall");
+                            writer.WriteLine(":: ----------------------------------------------------------");
                             break;
                         default:
                             writer.WriteLine($":: Unknown option: {option}");

@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Hook up everything else -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ButtonColorPaletteFormat.xaml" />
+        <ResourceDictionary Source="CheckboxTheme.xaml"/>
+        <ResourceDictionary Source="MenuButtonTheme.xaml" />
+        <ResourceDictionary Source="ButtonColorPaletteFormat.xaml" />
+        <ResourceDictionary Source="TooolbarColorTheme.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Load wallpapers -->
+    <ImageBrush x:Key="Wallpaper1" ImageSource="pack://application:,,,/Images/Cyber/bg1.png" />
+    <ImageBrush x:Key="Wallpaper2" ImageSource="pack://application:,,,/Images/Cyber/bg2.png" />
+    <ImageBrush x:Key="Wallpaper3" ImageSource="pack://application:,,,/Images/Cyber/bg3.png" />
+    <ImageBrush x:Key="Wallpaper4" ImageSource="pack://application:,,,/Images/Cyber/bg4.png" />
+    <ImageBrush x:Key="Wallpaper5" ImageSource="pack://application:,,,/Images/Cyber/bg5.png" />
+
+</ResourceDictionary>
