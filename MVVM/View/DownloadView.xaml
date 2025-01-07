@@ -26,7 +26,7 @@
                    Margin="0,0,0,10" 
                    HorizontalAlignment="Left" 
                    Grid.Row="0" />
-
+        <Button Content="Help" Name="Showhelp_btn" Margin="5" FontSize="14" HorizontalAlignment="Right" Grid.Row="0" Width="80" Click="Showhelp_btn_Click"/>
         <!-- Data Grid -->
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" HeadersVisibility="Column" Background="#444444" 
           Foreground="White" BorderBrush="Transparent" Height="335" VerticalAlignment="Stretch"
@@ -69,29 +69,39 @@
         <!-- Footer -->
         <Grid Grid.Row="2" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <!-- Spacer -->
-                <ColumnDefinition Width="Auto" />
-                <!-- Action Buttons -->
+                <ColumnDefinition Width="3*" />
+                <!-- For Download Path Selection -->
+                <ColumnDefinition Width="2*" />
+                <!-- For Action Buttons -->
             </Grid.ColumnDefinitions>
 
             <!-- Download Path Selection -->
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0">
                 <TextBlock Text="Download Path:" FontSize="14" FontWeight="Bold" Foreground="White" 
-                           VerticalAlignment="Center" Margin="0,0,10,0" />
-                <TextBox Text="{Binding SelectedDownloadPath}" IsReadOnly="True" Background="#2C2C2C" 
-                         Foreground="White" BorderBrush="Gray" FontSize="14" VerticalAlignment="Center" 
-                         Width="400" Margin="0,0,10,0" />
-                <Button Content="Select Path" Background="#0078D4" Foreground="White" 
-                        Command="{Binding SelectDownloadPathCommand}" VerticalAlignment="Center" Padding="5,0" />
+                   VerticalAlignment="Center" Margin="0,0,10,0" />
+                <Grid Background="Transparent" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <!-- Flexible width for the TextBox -->
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Fixed size for the button -->
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Text="{Binding SelectedDownloadPath}" IsReadOnly="True" Background="#2C2C2C" 
+                     Foreground="White" BorderBrush="Gray" FontSize="14" VerticalAlignment="Center" 
+                     Margin="0,0,10,0" Grid.Column="0" />
+                    <Button Content="Select Path" Background="#0078D4" Foreground="White" 
+                    Command="{Binding SelectDownloadPathCommand}" VerticalAlignment="Center" 
+                    Padding="10,0" Grid.Column="1" />
+                </Grid>
             </StackPanel>
 
             <!-- Download Buttons -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1">
                 <Button Content="Download via Mirror 1" Background="#0078D4" Foreground="White" 
-                        Margin="5" Command="{Binding DownloadSelectedCommand}" CommandParameter="Mirror1" />
+                Margin="5" Command="{Binding DownloadSelectedCommand}" CommandParameter="Mirror1" />
                 <Button Content="Download via Mirror 2" Background="#0078D4" Foreground="White" 
-                        Margin="5" Command="{Binding DownloadSelectedCommand}" CommandParameter="Mirror2" />
+                Margin="5" Command="{Binding DownloadSelectedCommand}" CommandParameter="Mirror2" />
             </StackPanel>
         </Grid>
     </Grid>

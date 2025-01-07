@@ -91,7 +91,7 @@ namespace Galadarbs_IT23033.MVVM.View
                         else
                         {
                             MessageBoxResult warning = MessageBox.Show(
-                             "This preset is disabled by default due to them breaking the system. If you want to use them, enable the preset first.",
+                             "This preset is disabled by default due to them being untested, therefore causing possible stability issues. If you want to use them, enable the preset first.",
                                 "Preset disabled",
                                 MessageBoxButton.OK,
                                  MessageBoxImage.Error);
@@ -112,12 +112,14 @@ namespace Galadarbs_IT23033.MVVM.View
             string[] privacyOptions = new string[]
             {
                 "Disable Customer Experience Program",
+                "Disable MareBackup",
                 "Disable Telemetry",
-                "Disable Ads",
-                "Disable Location services",
-                "Disable Copilot+",
+                "Disable Copilot",
                 "Disable Cortana",
-                "Disable Ad ID for all"
+                "Disable Location Tracking",
+                "Disable Recall",
+                "Disable Ad ID for All Users"
+
             };
 
             foreach (var option in privacyOptions)
@@ -132,11 +134,13 @@ namespace Galadarbs_IT23033.MVVM.View
         {
             string[] performanceOptions = new string[]
             {
-                "Set display to Performance",
                 "Enable Ultimate Performance Powerplan",
+                "Empty Recycle Bin",
+                "Give 3D apps higher priority",
                 "Give GPU higher priority",
                 "Give CPU higher priority",
-                "Schedule 3D tasks higher in CPU Govenor"
+                "Give Multimedia higher priority",
+
             };
 
             foreach (var option in performanceOptions)
@@ -150,11 +154,12 @@ namespace Galadarbs_IT23033.MVVM.View
 
         private void LoadExperimentalSettings()
         {
-            // Add specific experimental options here
+            
             string[] experimentalOptions = new string[]
             {
-            "Experimental Option 1",
-            "Experimental Option 2"
+                "Disable Defender",
+                "Disable Security",
+                "Clear pagefile after shutdown"
             };
 
             foreach (var option in experimentalOptions)
@@ -287,7 +292,9 @@ namespace Galadarbs_IT23033.MVVM.View
                 {
                     "Disable Customer Experience Program",
                     "Disable Telemetry",
-                    "Disable Ads"
+                    "Disable Location Tracking",
+                    "Disable Recall",
+                    "Disable Ad ID for All Users"
                 },
                 _ => Array.Empty<string>()
             };
@@ -356,7 +363,7 @@ namespace Galadarbs_IT23033.MVVM.View
         private void Experim_btn_Checked(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
-           "You're about to enable a highly experimental preset that *will* break your system. Are you sure you want to do this?",
+           "You're about to enable a highly experimental preset that are untested and can possibly cause stability issues. Are you sure you want to do this?",
            "Warning: Experimental Preset",
            MessageBoxButton.YesNo,
            MessageBoxImage.Warning);

@@ -17,6 +17,8 @@ using System.Text.Json;
 using System.IO;
 using static System.Net.WebRequestMethods;
 using System.Diagnostics;
+using Microsoft.VisualBasic;
+using Galadarbs_IT23033.MVVM.ViewModel;
 
 namespace Galadarbs_IT23033.MVVM.View
 {
@@ -78,67 +80,9 @@ namespace Galadarbs_IT23033.MVVM.View
         public List<BuildData> Builds { get; set; }
         public Dictionary<string, List<BuildData>> BuildsByVersion { get; set; }
 
-        private Dictionary<string, string> languages = new Dictionary<string, string>
-            {
-                { "neutral" , "Any Language"},
-                { "ar-sa", "Arabic (Saudi Arabia)" },
-                { "bg-bg","Bulgarian" },
-                { "cs-cz","Czech" },
-                { "da-dk", "Danish" },
-                { "de-de", "German" },
-                { "el-gr", "Greek" },
-                { "en-gb", "English (United Kingdom)" },
-                { "en-us", "English (United States)" },
-                { "es-es", "Spanish (Spain)" },
-                { "es-mx", "Spanish (Mexico)" },
-                { "et-ee", "Estonian" },
-                { "fi-fi", "Finnish" },
-                { "fr-ca", "French (Canada)" },
-                { "fr-fr", "French (France)" },
-                { "he-il", "Hebrew" },
-                { "hr-hr", "Croatian" },
-                { "hu-hu", "Hungarian" },
-                { "it-it", "Italian" },
-                { "ja-jp", "Japanese" },
-                { "ko-kr", "Korean" },
-                { "lt-lt", "Lithuanian" },
-                { "lv-lv", "Latvian" },
-                { "nb-no", "Norwegian (Bokmal)" },
-                { "nl-nl", "Dutch" },
-                { "pl-pl", "Polish" },
-                { "pt-br", "Portuguese (Brazil)" },
-                { "pt-pt", "Portuguese (Portugal)" },
-                { "ro-ro", "Romanian" },
-                { "ru-ru", "Russian" },
-                { "sk-sk", "Slovak" },
-                { "sl-si", "Slovenian" },
-                { "sr-latn-rs", "Serbian (Latin)" },
-                { "sv-se", "Swedish" },
-                { "th-th", "Thai" },
-                { "tr-tr", "Turkish" },
-                { "uk-ua", "Ukrainian" },
-                { "zh-cn", "Chinese (Simplified)" },
-                { "zh-hk", "Chinese (Hong Kong)" },
-                { "zh-tw", "Chinese (Traditional)" },
-            };
-
-        private Dictionary<string, string> Edition = new Dictionary<string, string>
-            {
-                { "CORE", "Windows Home" },
-                { "PROFESSIONAL","Windows Pro" },
-                { "COREN", "Windows Home N" },
-                { "PROFESSIONALN", "Windows Pro N"}
-            };
-
-        private Dictionary<string, string> ServerEdition = new Dictionary<string, string>
-            {
-                { "serverstandard", "Windows Server Standard" },
-                { "serverstandardcore", "Windows Server Standard (Core)"},
-                { "serverdatacenter", "Windows Server Datacenter" },
-                { "serverdatacentercore", "Windows Server Datacenter (Core)" },
-                { "serverturbine","Windows Server Datacenter: Azure Edition" },
-                { "serverturbinecore", "Windows Server Datacenter: Azure Edition (Core)" }
-            };
+        private Dictionary<string, string> languages = BuilderConstants.Languages;
+        private Dictionary<string, string> edition = BuilderConstants.Editions;
+        private Dictionary<string, string> serverEdition = BuilderConstants.ServerEditions;
         public async Task GetBuildVersions()
         {
             string url = "https://api.uupdump.net/listid.php";
@@ -188,7 +132,7 @@ namespace Galadarbs_IT23033.MVVM.View
                             BuildNumber = buildNumber,
                             Architecture = architecture,
                             Uuid = uuid,
-                            Edition = string.Join(", ", Edition.Select(pvk => $"{pvk.Key}")),
+                            Edition = string.Join(", ", edition.Select(pvk => $"{pvk.Key}")),
                             Lang = string.Join(", ", languages.Select(kvp => $"{kvp.Key}"))
 
                             //Lang = string.Join(", ", languages.Select(kvp => $"{kvp.Key}: {kvp.Value}")) // Add all languages
@@ -207,7 +151,7 @@ namespace Galadarbs_IT23033.MVVM.View
                     {
                         OperatingSystemComboBox.ItemsSource = mainVersions.ToList();
                         LangCombo.ItemsSource = languages.Values.ToList();
-                        EditionCombo.ItemsSource = Edition.Values.ToList();
+                        EditionCombo.ItemsSource = edition.Values.ToList();
                     });
 
                     MessageBox.Show("Builds loaded successfully. Use the Combobox to access them.");
@@ -247,9 +191,9 @@ namespace Galadarbs_IT23033.MVVM.View
                         };
 
                         //// Apply the style from XAML. 
-                        if (Application.Current.Resources.Contains("CheckboxStyle")) 
+                        if (Application.Current.Resources.Contains("RoundedCheckboxStyle")) 
                         {
-                            x86CheckBox.Style = (Style)Application.Current.Resources["CheckboxStyle"];
+                            x86CheckBox.Style = (Style)Application.Current.Resources["RoundedCheckboxStyle"];
                         }
 
                         // Attach event handlers for the dynamically added checkbox
@@ -286,11 +230,11 @@ namespace Galadarbs_IT23033.MVVM.View
 
                 if (selectedVersion == "Windows Server")
                 {
-                    EditionCombo.ItemsSource = ServerEdition.Values.ToList(); // Use Server Editions
+                    EditionCombo.ItemsSource = serverEdition.Values.ToList(); // Use Server Editions
                 }
                 else
                 {
-                    EditionCombo.ItemsSource = Edition.Values.ToList(); // Use Default Editions
+                    EditionCombo.ItemsSource = edition.Values.ToList(); // Use Default Editions
                 }
 
                 Dispatcher.Invoke(() =>
@@ -466,7 +410,7 @@ namespace Galadarbs_IT23033.MVVM.View
             }
 
             // Retrieve the correct dictionary based on the operating system
-            Dictionary<string, string> selectedEditionDictionary = selectedOperatingSystem == "Windows Server" ? ServerEdition : Edition;
+            Dictionary<string, string> selectedEditionDictionary = selectedOperatingSystem == "Windows Server" ? serverEdition : edition;
 
             // Retrieve codes based on the selected display names
             string selectedLanguageCode = languages.FirstOrDefault(kvp => kvp.Value == selectedLanguageDisplay).Key;

@@ -48,8 +48,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
 
         public AboutViewModel AboutVm { get; set; }
 
-        public CompDiagnosticViewModel  CompDiagVm {  get; set; }
-
         public WinDebloatViewModel WinDebVm { get; set; } 
 
         private object _currentView;
@@ -72,7 +70,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             OSModVm = new OSModViewModel();
             ISOBuildVm = new ISOBuilderViewModel();
             AboutVm = new AboutViewModel();
-            CompDiagVm = new CompDiagnosticViewModel();
             DownloadVm = new DownloadViewModel();
             WinDebVm = new WinDebloatViewModel();
             CurrentView = HomeVm;
@@ -105,11 +102,6 @@ namespace Galadarbs_IT23033.MVVM.ViewModel
             AboutViewCommand = new RelayCommand(o =>
             {
                 CurrentView = AboutVm;
-            });
-
-            CompDiagnosticViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = CompDiagVm;
             });
 
             DownloaderViewCommand = new RelayCommand(o =>

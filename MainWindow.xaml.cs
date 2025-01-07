@@ -254,22 +254,29 @@ namespace Galadarbs_IT23033
             countdownTimer.Tick += CountdownTimer_Tick;
             countdownTimer.Start();
 
-            MessageBoxResult result = MessageBox.Show(
-                $"You've been idle for a while. Would you like the program to close?\n\nThe program will auto-close in {countdownTime} seconds if no response.",
-                "Are you still there?",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning);
+            // Start a new task to show the message box without blocking the UI thread.
+            Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBoxResult result = MessageBox.Show(
+                        $"You've been idle for a while. Would you like the program to close?\n\nThe program will auto-close in {countdownTime} seconds if no response.",
+                        "Are you still there?",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning);
 
-            if (result == MessageBoxResult.No)
-            {
-                countdownTimer.Stop();
-                Application.Current.Shutdown();
-            }
-            else
-            {
-                countdownTimer.Stop();
-                idleTimer.Start();
-            }
+                    if (result == MessageBoxResult.No)
+                    {
+                        countdownTimer.Stop();
+                        Application.Current.Shutdown();
+                    }
+                    else
+                    {
+                        countdownTimer.Stop();
+                        idleTimer.Start();
+                    }
+                });
+            });
         }
 
         private void CountdownTimer_Tick(object sender, EventArgs e)
@@ -279,6 +286,19 @@ namespace Galadarbs_IT23033
             if (countdownTime <= 0)
             {
                 countdownTimer.Stop();
+
+                // Ensure no message box remains visible before shutting down.
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window is MessageBoxResult)
+                        {
+                            window.Close();
+                        }
+                    }
+                });
+
                 Application.Current.Shutdown();
             }
         }

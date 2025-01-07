@@ -57,16 +57,35 @@ namespace Galadarbs_IT23033.MVVM.View
             float availableRam = ramCounter.NextValue(); // Get available RAM in MB
                                                          // float freeStorageMB = GetFreeStorage();
             float totalFreeSpaceGB = GetTotalFreeSpace();
-
+            int partitionCount = GetPartitionCount();
+            float totalStorageCapacity = GetTotalStorageCapacity();
+            TimeSpan systemUptime = GetSystemUptime(); // Get uptime from the system
 
             return $"OS Name: {osName}\n" +
                    $"Machine Name: {machineName}\n" +
                    $"User Name: {userName}\n" +
                    $"CPU Usage: {cpuUsage.ToString("0.00")}%\n" +
                    $"Available RAM: {availableRam.ToString("0")} MB\n" +
-                   $"Total Free Space: {totalFreeSpaceGB.ToString("0.0")} GB";
+                   $"Total Free Space: {totalFreeSpaceGB.ToString("0.0")} GB\n" +
+                   $"Total Storage Capacity: {totalStorageCapacity.ToString("0.0")} GB\n" +
+                   $"Partition Count: {partitionCount}\n" +
+                   $"System Uptime: {FormatUptime(systemUptime)}";
         }
+        private static int GetPartitionCount() // New method  
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            int partitionCount = 0;
 
+            foreach (DriveInfo drive in drives)
+            {
+                if (drive.IsReady)
+                {
+                    partitionCount++;
+                }
+            }
+
+            return partitionCount;
+        }
         private static float GetTotalFreeSpace()
         {
             float totalFreeSpaceGB = 0;
@@ -87,6 +106,23 @@ namespace Galadarbs_IT23033.MVVM.View
                                                                        // It's possible that this is the "absolute error" and we won't get any more accurate readings than this.
 
         }
+
+        private static float GetTotalStorageCapacity()  // New method  
+        {
+            float totalCapacityGB = 0;
+            DriveInfo[] drives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo drive in drives)
+            {
+                if (drive.IsReady)
+                {
+                    totalCapacityGB += drive.TotalSize / (1024 * 1024 * 1024); // Convert bytes to GB  
+                }
+            }
+
+            return totalCapacityGB;
+        }
+
 
         private string GetWindowsVersion() // A function that checks the host's version number using interopservices library.
         {
@@ -118,6 +154,18 @@ namespace Galadarbs_IT23033.MVVM.View
                     break;
             }
             return versionName;
+        }
+
+        private TimeSpan GetSystemUptime()
+        {
+            // Use Environment.TickCount64 to get uptime in milliseconds
+            return TimeSpan.FromMilliseconds(Environment.TickCount64);
+        }
+
+        private string FormatUptime(TimeSpan uptime)
+        {
+            // Format uptime as days, hours, minutes, and seconds
+            return $"{uptime.Days} days, {uptime.Hours} hours, {uptime.Minutes} minutes, {uptime.Seconds} seconds";
         }
     }
 }

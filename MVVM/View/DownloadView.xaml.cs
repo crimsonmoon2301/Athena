@@ -28,7 +28,7 @@ namespace Galadarbs_IT23033.MVVM.View
         {
             InitializeComponent();
         }
-
+     
         private void DataGrid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             // Get the clicked DataGrid row
@@ -75,6 +75,15 @@ namespace Galadarbs_IT23033.MVVM.View
                 // Optional: Message if no row was clicked
                 MessageBox.Show("Please select a valid item to view information.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void Showhelp_btn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("All mirrors used in this downloader are from original and trusted sources. \n\n" +
+                            "You can right-click on any mirror to view its source or information.",
+                            "Downloader Help",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
         }
     }
 }
